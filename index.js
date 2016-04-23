@@ -142,12 +142,12 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     cb(context);
   },
-  joke(sessionId, context, entities, message, cb) {
+  joke(sessionId, context, cb) {
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
-      message = "test";
+      var message = "test";
       fbMessage(recipientId, message, (err, data) => {
         if (err) {
           console.log(
