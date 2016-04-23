@@ -162,8 +162,7 @@ const actions = {
     console.log(error.message);
   },
   ['joke'](sessionId, context, cb) {
-    const jokes = allJokes[context.cat || 'default'];
-    context.joke = jokes[Math.floor(Math.random() * jokes.length)];
+    context.joke = "I'm a joke.";
 
     cb(context);
   },
