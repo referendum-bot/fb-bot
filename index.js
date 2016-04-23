@@ -176,7 +176,9 @@ app.post('/fb', (req, res) => {
   // Parsing the Messenger API response
   
   const messaging = getFirstMessagingEntry(req.body);
-  if (messaging && messaging.message || messaging.recipient.id === FB_PAGE_ID) {
+  
+  console.log(messaging);
+  if (messaging && messaging.message && messaging.recipient.id === FB_PAGE_ID) {
     // Yay! We got a new message!
 
     // We retrieve the Facebook user ID of the sender
