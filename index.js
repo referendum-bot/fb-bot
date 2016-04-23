@@ -142,7 +142,7 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     cb(context);
   },
-  joke(sessionId, context, cb) {
+  ['joke'](sessionId, context, cb) {
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
       // Yay, we found our recipient!
