@@ -142,6 +142,32 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     cb(context);
   },
+  joke(sessionId, context, entities, message, cb) {
+    const recipientId = sessions[sessionId].fbid;
+    if (recipientId) {
+      // Yay, we found our recipient!
+      // Let's forward our bot response to her.
+      message = "test";
+      fbMessage(recipientId, message, (err, data) => {
+        if (err) {
+          console.log(
+            'Oops! An error occurred while forwarding the response to',
+            recipientId,
+            ':',
+            err
+          );
+        }
+
+        // Let's give the wheel back to our bot
+        cb();
+      });
+    } else {
+      console.log('Oops! Couldn\'t find user for session:', sessionId);
+      // Giving the wheel back to our bot
+      cb();
+    }
+    //cb(context);
+  },
   error(sessionId, context, error) {
     console.log(error.message);
   },
