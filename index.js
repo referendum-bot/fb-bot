@@ -140,36 +140,18 @@ const actions = {
     }
   },
   merge(sessionId, context, entities, message, cb) {
+    delete context.joke;
+
     cb(context);
   },
   error(sessionId, context, error) {
     console.log(error.message);
   },
   ['joke'](sessionId, context, cb) {
-    const recipientId = sessions[sessionId].fbid;
-    if (recipientId) {
-      // Yay, we found our recipient!
-      // Let's forward our bot response to her.
-      var message = "test";
-      fbMessage(recipientId, message, (err, data) => {
-        if (err) {
-          console.log(
-            'Oops! An error occurred while forwarding the response to',
-            recipientId,
-            ':',
-            err
-          );
-        }
+    const jokes = allJokes[context.cat || 'default'];
+    context.joke = jokes[Math.floor(Math.random() * jokes.length)];
 
-        // Let's give the wheel back to our bot
-        cb();
-      });
-    } else {
-      console.log('Oops! Couldn\'t find user for session:', sessionId);
-      // Giving the wheel back to our bot
-      cb();
-    }
-    //cb(context);
+    cb(context);
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
