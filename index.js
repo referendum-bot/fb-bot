@@ -189,6 +189,7 @@ app.post('/fb', (req, res) => {
     
     // Echo
     fbMessage(sessionId, msg);
+    console.log(sessionId, msg);
 
     if (atts) {
       // We received an attachment
