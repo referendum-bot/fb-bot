@@ -40,7 +40,7 @@ app.post('/webhook/', function (req, res) {
                 sendGenericMessage(sender)
                 continue
             }
-            sendTextMessage(sender, "Name an object that's rounded, made of glass and gives out light. You said: " + text.substring(0, 200))
+            sendTextMessage(sender, "You said: " + text.substring(0, 200))
         }
         if (event.postback) {
             text = JSON.stringify(event.postback)
@@ -51,7 +51,7 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-var token = "CAAGhZBX9FnzUBABDBVjYMMyEYZB8oHFG5W6zEvruHCNiZCloUpmZCSuZABZAPqk82bhbqcEBFfP2iEBpSX3ZCCEEcdUrJZAQua3SPvMs8DwjaOkVIlEVXulam2nopFNeGR21h5ZAZCZANCAK62e36W1e77qllSDzwXZCvuabUSEeqWkqxDXf5Ew1lm4h13U1qjG9a9nbb8OZBtH4ddwZDZD"
+var token = "CAAJZA2JhagccBAPLmUxZBkgtXPnBIXCHjyQNZAePgYDT8MqMKRHWEz9IYZCnXuH1qkkXR4PYklguKW7gtZA7ojbp3RnEEsrosP7IzydyqipcYIjJxP7N1pPcl7alZBXR15LISfdBMiL2FGyxWGBzdw8HBZBTwZAAqoIBVm81eQAvQK4kI4lShS4NmdPHPo8Qh7ZCkHdE2K2CNSQZDZD"
 
 function sendTextMessage(sender, text) {
     messageData = {
