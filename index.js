@@ -142,6 +142,9 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     cb(context);
   },
+  error(sessionId, context, error) {
+    console.log(error.message);
+  },
   ['joke'](sessionId, context, cb) {
     const recipientId = sessions[sessionId].fbid;
     if (recipientId) {
@@ -167,9 +170,6 @@ const actions = {
       cb();
     }
     //cb(context);
-  },
-  error(sessionId, context, error) {
-    console.log(error.message);
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
