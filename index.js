@@ -2,6 +2,11 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
 var app = express()
+const Wit = require('node-wit').Wit;
+
+const WIT_TOKEN = "RZHYEMNR7RMPYHJURW6VXPHCWVNBOAR7";
+var token = "CAAJZA2JhagccBAPLmUxZBkgtXPnBIXCHjyQNZAePgYDT8MqMKRHWEz9IYZCnXuH1qkkXR4PYklguKW7gtZA7ojbp3RnEEsrosP7IzydyqipcYIjJxP7N1pPcl7alZBXR15LISfdBMiL2FGyxWGBzdw8HBZBTwZAAqoIBVm81eQAvQK4kI4lShS4NmdPHPo8Qh7ZCkHdE2K2CNSQZDZD"
+
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -50,8 +55,6 @@ app.post('/webhook/', function (req, res) {
     }
     res.sendStatus(200)
 })
-
-var token = "CAAJZA2JhagccBAPLmUxZBkgtXPnBIXCHjyQNZAePgYDT8MqMKRHWEz9IYZCnXuH1qkkXR4PYklguKW7gtZA7ojbp3RnEEsrosP7IzydyqipcYIjJxP7N1pPcl7alZBXR15LISfdBMiL2FGyxWGBzdw8HBZBTwZAAqoIBVm81eQAvQK4kI4lShS4NmdPHPo8Qh7ZCkHdE2K2CNSQZDZD"
 
 function sendTextMessage(sender, text) {
     messageData = {
