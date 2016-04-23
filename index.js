@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('Starting app');
+
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
