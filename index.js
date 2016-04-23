@@ -194,7 +194,7 @@ app.post('/fb', (req, res) => {
     
     // Echo
     fbMessage(sessionId, messaging.recipient.id);
-    console.log(sessionId, msg);
+    console.log('aa', sessionId);
 
     if (atts) {
       // We received an attachment
