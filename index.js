@@ -162,9 +162,17 @@ const actions = {
     console.log(error.message);
   },
   ['joke'](sessionId, context, cb) {
-    context.joke = "I'm a joke.";
+    request('http://tambal.azurewebsites.net/joke/random', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+            var jokeObj = JSON.parse(body);
+            context.joke = jokeObj['joke'];
+         } else {
+          context.joke = "No joke found?";
+          cb(context);
+        }
+    });
 
-    cb(context);
   },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
