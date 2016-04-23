@@ -191,10 +191,6 @@ app.post('/fb', (req, res) => {
     // We retrieve the message content
     const msg = messaging.message.text;
     const atts = messaging.message.attachments;
-    
-    // Echo
-    fbMessage(sessionId, messaging.recipient.id);
-    console.log('aa', sessionId);
 
     if (atts) {
       // We received an attachment
