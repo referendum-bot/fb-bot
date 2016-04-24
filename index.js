@@ -174,7 +174,22 @@ const actions = {
       // TODO: say some error message 
       console.err('There was no template... oh no!', context);
     } else {
-      context.template = generateEconomyMessage();
+      var message = generateEconomyMessage();
+      
+      fbMessage(recipientId, message, (err, data) => {
+        if (err) {
+          console.log(
+            'Oops! An error occurred while forwarding the response to',
+            recipientId,
+            ':',
+            err
+          );
+        }
+
+        // Let's give the wheel back to our bot
+        cb();
+      });
+      
       cb(context);
     }
   },
