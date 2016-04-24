@@ -68,7 +68,7 @@ const fbMessage = function (recipientId, msg, cb) {
         method: 'POST',
         json: {
             recipient: {id:recipientId},
-            message: msg,
+            message: message,
         }
     }, function(error, response, body) {
         if (error) {
