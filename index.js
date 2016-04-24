@@ -54,14 +54,7 @@ const fbReq = request.defaults({
 
 const fbMessage = function (recipientId, msg, cb) {
   var message;
-  try
-  {
-    message = JSON.parse(msg);
-  }
-  catch(e)
-  {
-    message = {text: msg}
-  };
+  message = msg.text ? msg : {text:msg};
   
   console.log('message is ', message);
   
