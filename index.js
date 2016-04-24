@@ -161,6 +161,20 @@ const actions = {
     });
 
   },
+  ['represent-question'](sessionId, context, cb) {
+    request('https://represent.me/api/next_question/', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+            var dataObj = JSON.parse(body);
+            context.question = dataObj['results'][0]['question'];
+            cb(context);
+         } else {
+          context.joke = "No question returned?";
+          cb(context);
+        }
+    });
+
+  },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 };
