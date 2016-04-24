@@ -47,21 +47,16 @@ const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
 const fbReq = request.defaults({
   uri: 'https://graph.facebook.com/me/messages',
   method: 'POST',
-  json: true,
   qs: { access_token: FB_PAGE_TOKEN },
   headers: {'Content-Type': 'application/json'},
 });
 
 const fbMessage = (recipientId, msg, cb) => {
   const opts = {
-    form: {
-      recipient: {
-        id: recipientId,
-      },
-      message: {
-        text: msg,
-      },
-    },
+    json:{
+      recipient: {id: recipientId},
+      message: msg
+    }
   };
   fbReq(opts, (err, resp, data) => {
     if (cb) {
