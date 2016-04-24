@@ -206,17 +206,32 @@ const actions = {
   },
   ['represent-question'](sessionId, context, cb) {
     console.log("requesting a question");
+    var ses = findOrCreateSession(sessionId);
+    if (ses.answered_questions == undefined) {
+        ses.answered_questions = [];
+    };
+      var qj = JSON.stringify(ses.answered_questions);
+      var idstring = qj.substring(1, qj.length-1);
+      idstring = "&id__in!="+idstring;
+      console.log(idstring);
     //note: we can use `&id__in!=45,22,94` to avoid being re-asked the same question
-    request('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum', function (error, response, body) {
+    request('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum'+idstring, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
             var dataObj = JSON.parse(body);
-            //just get the main part of the question for the mo
-            context.question = dataObj['results'][0]['question'];
-            console.log("got question:", context.question);
+            //get the first question
+            var q = dataObj['results'][0];
+            if (q) {
+
+                ses.answered_questions.push(q.id);
+                context.question = q['question'];
+                console.log("got question:", context.question);
+            } else {
+                context.question = "No questions left! Go and vote :)"
+            }
             cb(context);
          } else {
-          context.question = "No question returned?";
+          context.question = "No question returned? perhaps you answered them all...";
           cb(context);
         }
     });
