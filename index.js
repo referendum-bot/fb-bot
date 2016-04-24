@@ -317,7 +317,7 @@ app.post('/fb', (req, res) => {
 });
 
 function generateEconomyMessage() {
-    messageData = {
+    var messageData = {
         "attachment": {
             "type": "template",
             "payload": {
