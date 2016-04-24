@@ -40,6 +40,7 @@ if (!FB_PAGE_TOKEN) {
 }
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
 
+var localsessions = {};
 // Messenger API specific code
 
 // See the Send API reference
@@ -206,7 +207,10 @@ const actions = {
   },
   ['represent-question'](sessionId, context, cb) {
     console.log("requesting a question");
-    var ses = findOrCreateSession(sessionId);
+      if (localsessions[sessionId] == undefined){
+          localsessions[sessionId]  = {};
+      }
+    var ses = localsessions[sessionId];
     if (ses.answered_questions == undefined) {
         ses.answered_questions = [];
     };
