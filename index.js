@@ -52,7 +52,15 @@ const fbReq = request.defaults({
 });
 
 const fbMessage = function (recipientId, msg, cb) {
-  console.log('dsjfalakdshjfslkdjhfdslkjfhsk', msg);
+  var message;
+  try
+  {
+    message = JSON.parse(msg);
+  }
+  catch(e)
+  {
+    message = {text: msg}
+  };
   
   request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
