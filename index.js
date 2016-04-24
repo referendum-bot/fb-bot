@@ -181,7 +181,7 @@ const actions = {
     });
 
   },
-  ['greet'](sessionId, context, cb) {
+  ['get-name'](sessionId, context, cb) {
     console.log('Getting user info');
     var userId = sessions[sessionId].fbid;
     request('https://graph.facebook.com/v2.6/' + userId + '?fields=first_name,last_name,profile_pic&access_token=' + FB_PAGE_TOKEN, function(error, response, body) {
