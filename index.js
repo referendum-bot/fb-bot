@@ -142,7 +142,7 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     delete context.joke;
     delete context.question;
-    delete contect.name;
+    delete context.name;
 
     cb(context);
   },
