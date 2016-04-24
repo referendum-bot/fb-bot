@@ -291,3 +291,63 @@ app.post('/fb', (req, res) => {
   }
   res.sendStatus(200);
 });
+
+function sendEconomyMessage(sender) {
+    messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Would leaving the EU cost or benefit the UK economy?",
+                    "subtitle": "The £4,300 question: would leaving the EU really make every household worse off? According to new Treasury research, it would cost us.",
+                    "image_url": "https://4csjs540i3sl474btf1qhbrq-wpengine.netdna-ssl.com/wp-content/themes/eureferendum/assets/img/box-quiz.jpg",
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": "https://fullfact.org/europe/4300-question-would-leaving-eu-really-make-every-household-worse/",
+                        "title": "Go to Full Fact."
+                    }, {
+                        "type": "postback",
+                        "title": "Read a summary",
+                        "payload": "Payload for reading summary",
+                    }],
+                }, {
+                    "title": "Question 1",
+                    "subtitle": "Tell me if you agree or disagree.",
+                    "image_url": "https://4csjs540i3sl474btf1qhbrq-wpengine.netdna-ssl.com/wp-content/themes/eureferendum/assets/img/box-quiz.jpg",
+                    "buttons": [
+                    	{
+                        "type": "postback",
+                        "title": "Agree",
+                        "payload": "Payload - result for agree"
+                    },
+                    {
+                    	"type": "postback",
+                        "title": "Neither agree or disagree",
+                        "payload": "Payload - result for neither agree of disagree"
+                    },
+                    {
+                    	"type": "postback",
+                        "title": "Disagree",
+                        "payload": "Payload - result for disagree",
+                    }],
+                }]
+            }
+        }
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
+}
