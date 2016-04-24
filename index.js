@@ -148,7 +148,19 @@ const actions = {
       // TODO: say some error message 
       console.err('There was no template... oh no!', context);
     } else {
-      console.log('');
+      fbMessage(recipientId, generateEconomyMessage(), (err, data) => {
+        if (err) {
+          console.log(
+            'Oops! An error occurred while forwarding the response to',
+            recipientId,
+            ':',
+            err
+          );
+        };
+
+        // Let's give the wheel back to our bot
+        cb();
+      });
     }
   },
   merge(sessionId, context, entities, message, cb) {
@@ -304,7 +316,7 @@ app.post('/fb', (req, res) => {
   res.sendStatus(200);
 });
 
-function sendEconomyMessage(sender) {
+function generateEconomyMessage() {
     messageData = {
         "attachment": {
             "type": "template",
@@ -346,20 +358,7 @@ function sendEconomyMessage(sender) {
                 }]
             }
         }
-    }
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
+    };
+    
+    return messageData; 
 }
