@@ -235,7 +235,7 @@ const actions = {
     request('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum'+idstring, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
-            //var dataObj = JSON.parse(body);
+            var dataObj = JSON.parse(body);
             //get the first question
             var q = dataObj['results'][0];
             if (q) {
