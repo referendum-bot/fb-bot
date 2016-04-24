@@ -141,6 +141,7 @@ const actions = {
   },
   merge(sessionId, context, entities, message, cb) {
     delete context.joke;
+    delete context.question;
 
     cb(context);
   },
@@ -162,14 +163,16 @@ const actions = {
 
   },
   ['represent-question'](sessionId, context, cb) {
+    console.log("requesting a question")
     request('https://represent.me/api/next_question/', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
             var dataObj = JSON.parse(body);
             context.question = dataObj['results'][0]['question'];
+            console.log("got question:", context.question);
             cb(context);
          } else {
-          context.joke = "No question returned?";
+          context.question = "No question returned?";
           cb(context);
         }
     });
