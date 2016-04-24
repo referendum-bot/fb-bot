@@ -143,6 +143,8 @@ const actions = {
     delete context.joke;
     delete context.question;
     delete context.name;
+    
+    console.log('entities:', entities);
 
     cb(context);
   },
@@ -255,7 +257,7 @@ app.post('/fb', (req, res) => {
       );
     } else if (msg) {
       // We received a text message
-
+      
       // Let's forward the message to the Wit.ai Bot Engine
       // This will run all actions until our bot has nothing left to do
       wit.runActions(
