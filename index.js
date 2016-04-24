@@ -140,11 +140,14 @@ const actions = {
     }
   },
   merge(sessionId, context, entities, message, cb) {
+    // TODO: do we really need to delete everything?
     delete context.joke;
     delete context.question;
     delete context.name;
+    delete context.entities; 
     
-    console.log('entities:', entities);
+    context.intent = entities.intent.value;
+    console.log('intent', context.intent);
 
     cb(context);
   },
