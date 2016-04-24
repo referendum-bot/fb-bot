@@ -139,6 +139,18 @@ const actions = {
       cb();
     }
   },
+  ['sayTemplate'](sessionId, context, cb) {
+    // Our bot has something to say!
+    // Let's retrieve the Facebook user whose session belongs to
+    const recipientId = sessions[sessionId].fbid;
+    
+    if(!context.intents) {
+      // TODO: say some error message 
+      console.err('There was no template... oh no!', context);
+    } else {
+      console.log('');
+    }
+  },
   merge(sessionId, context, entities, message, cb) {
     // TODO: do we really need to delete everything?
     delete context.joke;
