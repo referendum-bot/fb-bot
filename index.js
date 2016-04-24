@@ -240,12 +240,27 @@ const actions = {
             var q = dataObj['results'][0];
             if (q) {
 
+              var message = generateRepresentMessage(q);
+
+                const recipientId = sessions[sessionId].fbid;
+              fbMessage(recipientId, message, (err, data) => {
+                  if (err) {
+                      console.log(
+                          'Oops! An error occurred while forwarding the response to',
+                          recipientId,
+                          ':',
+                          err
+                      );
+                  }
+              });
+
                 ses.answered_questions.push(q.id);
                 context.question = q['question'];
                 console.log("got question:", context.question);
             } else {
                 context.question = "No questions left! Go and vote :)"
             }
+
             cb(context);
          } else {
           context.question = "No question returned? perhaps you answered them all...";
@@ -405,4 +420,39 @@ function generateEconomyMessage() {
     };
     
     return messageData; 
+}
+
+
+function generateRepresentMessage(q) {
+    var messageData = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": q.question,
+                    "subtitle": "Tell me if you agree or disagree.",
+                    "image_url": q.ogImage,
+                    "buttons": [
+                    	{
+                        "type": "postback",
+                        "title": "Agree",
+                        "payload": "Payload - result for agree"
+                    },
+                    {
+                    	"type": "postback",
+                        "title": "Neither agree or disagree",
+                        "payload": "Payload - result for neither agree of disagree"
+                    },
+                    {
+                    	"type": "postback",
+                        "title": "Disagree",
+                        "payload": "Payload - result for disagree",
+                    }],
+                }]
+            }
+        }
+    };
+
+    return messageData;
 }
