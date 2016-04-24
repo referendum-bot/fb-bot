@@ -142,6 +142,7 @@ const actions = {
   merge(sessionId, context, entities, message, cb) {
     delete context.joke;
     delete context.question;
+    delete contect.name;
 
     cb(context);
   },
@@ -180,6 +181,23 @@ const actions = {
     });
 
   },
+  ['greet'](sessionId, context, cb) {
+    console.log('Getting user info');
+    var userId = sessions[sessionId].fbid;
+    request('https://graph.facebook.com/v2.6/' + userId + '?fields=first_name,last_name,profile_pic&access_token=' + FB_PAGE_TOKEN, function(error, response, body) {
+         if (!error && response.statusCode == 200) {
+            console.log(body);
+            var dataObj = JSON.parse(body);
+            //just get the main part of the question for the mo
+            context.name = dataObj.first_name;
+            console.log("got name:", context.name);
+            cb(context);
+         } else {
+          context.question = "Error getting user data from the FB api";
+          cb(context);
+        }
+    });
+  }
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
 };
