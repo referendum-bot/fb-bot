@@ -111,20 +111,6 @@ const findOrCreateSession = (fbid) => {
   return sessionId;
 };
 
-const allJokes = {
-  chuck: [
-    'Chuck Norris counted to infinity - twice.',
-    'Death once had a near-Chuck Norris experience.',
-  ],
-  tech: [
-    'Did you hear about the two antennas that got married? The ceremony was long and boring, but the reception was great!',
-    'Why do geeks mistake Halloween and Christmas? Because Oct 31 === Dec 25.',
-  ],
-  default: [
-    'Why was the Math book sad? Because it had so many problems.',
-  ],
-};
-
 // Our bot actions
 const actions = {
   say(sessionId, context, message, cb) {
