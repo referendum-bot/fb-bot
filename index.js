@@ -147,6 +147,7 @@ const actions = {
     delete context.entities; 
     
     context.intent = entities.intent.value;
+    console.log(entities);
     console.log('intent', context.intent);
 
     cb(context);
