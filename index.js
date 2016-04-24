@@ -52,13 +52,15 @@ const fbReq = request.defaults({
 });
 
 const fbMessage = function (recipientId, msg, cb) {
+  console.log(msg);
+  
   request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token:FB_PAGE_TOKEN},
         method: 'POST',
         json: {
             recipient: {id:recipientId},
-            message: generateEconomyMessage(),
+            message: msg,
         }
     }, function(error, response, body) {
         if (error) {
