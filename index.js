@@ -164,7 +164,7 @@ const actions = {
   },
   ['represent-question'](sessionId, context, cb) {
     console.log("requesting a question")
-    request('https://represent.me/api/next_question/', function (error, response, body) {
+    request('https://represent.me/api/next_question/?subtype=likert', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
             var dataObj = JSON.parse(body);
