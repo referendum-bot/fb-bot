@@ -207,7 +207,7 @@ const actions = {
   ['represent-question'](sessionId, context, cb) {
     console.log("requesting a question");
     //note: we can use `&id__in!=45,22,94` to avoid being re-asked the same question
-    request('https://represent.me/api/next_question/?subtype=likert', function (error, response, body) {
+    request('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             console.log(body);
             var dataObj = JSON.parse(body);
