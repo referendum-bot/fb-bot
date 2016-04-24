@@ -51,7 +51,25 @@ const fbReq = request.defaults({
   headers: {'Content-Type': 'application/json'},
 });
 
-const fbMessage = (recipientId, msg, cb) => {
+const fbMessage = function (recipientId, msg, cb) {
+  request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:FB_PAGE_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id:recipientId},
+            message: msg,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    });
+  
+  
+  ///
   const opts = {
     json:{
       recipient: {id: recipientId},
