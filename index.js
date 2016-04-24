@@ -218,6 +218,7 @@ const actions = {
       var idstring = qj.substring(1, qj.length-1);
       idstring = "&id__in!="+idstring;
       console.log(idstring);
+      console.log('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum'+idstring);
     //note: we can use `&id__in!=45,22,94` to avoid being re-asked the same question
     request('https://represent.me/api/next_question/?subtype=likert&tags__tag__text=EUreferendum'+idstring, function (error, response, body) {
         if (!error && response.statusCode == 200) {
