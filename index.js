@@ -154,7 +154,8 @@ const actions = {
             console.log(body);
             var jokeObj = JSON.parse(body);
             context.joke = jokeObj['joke'];
-            cb(context);
+            say(sessionId, context, context.joke, cb);
+            //cb(context);
          } else {
           context.joke = "No joke found?";
           cb(context);
