@@ -3,6 +3,8 @@ This Facebook messenger bot was created as an entry into the Hack The Vote Hacka
 
 One of the key features is integration with the represent.me API to obtain questions which may help the young voter to decide who to vote for. 
 
+![presenting the bot at Hack the Vote](https://pbs.twimg.com/media/Cgz_u7HWMAAXp2K.jpg:large)
+
 ## Getting Started
 1. npm install body-parser express request 
 2. Download and install ngrok from https://ngrok.com/download
